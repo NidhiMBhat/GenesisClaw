@@ -1,0 +1,17 @@
+{
+  "last_updated": "2026-05-01T18:30:00Z",
+  "research_gaps": [
+    {
+      "topic": "LLM Hallucination Mitigation",
+      "gap_score": 8.5,
+      "summary": "Lack of datasets focusing on Indian Legal codes (BNS).",
+      "status": "unexplored"
+    },
+    {
+      "topic": "Behavioral Bot Detection",
+      "gap_score": 7.2,
+      "summary": "Need for advanced Merkle hashing in scraping detection.",
+      "status": "in_progress"
+    }
+  ]
+}

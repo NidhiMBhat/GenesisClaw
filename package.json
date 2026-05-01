@@ -1,0 +1,11 @@
+{
+  "name": "genesisclaw-backend",
+  "version": "1.0.0",
+  "description": "OpenClaw AI Backend for Telegram",
+  "scripts": {
+    "start": "npx openclaw gateway --port 18789"
+  },
+  "dependencies": {
+    "openclaw": "latest"
+  }
+}
