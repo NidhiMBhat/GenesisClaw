@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["gap_text", "keywords", "confidence"],
+    "properties": {
+      "gap_text": {
+        "type": "string",
+        "description": "One specific, falsifiable research gap. Must be actionable, not vague."
+      },
+      "keywords": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 2,
+        "maxItems": 5
+      },
+      "confidence": {
+        "type": "string",
+        "enum": ["high", "medium", "low"]
+      }
+    }
+  }
+}
