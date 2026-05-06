@@ -1,4 +1,4 @@
-import { generatePlan } from "../skills/execution-planner.js";
+import { generatePlan } from "../execution-planner.js";
 
 const testInput = {
   gap: "No existing benchmark evaluates LLM hallucination on Indian statutory law (BNS/IPC citations).",

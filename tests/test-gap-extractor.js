@@ -1,4 +1,4 @@
-import { extractGaps } from "../skills/gap-extractor.js";
+import { extractGaps } from "../gap-extractor.js";
 
 // Sample abstracts for testing (replace with real Semantic Scholar pulls)
 const testAbstracts = [
