@@ -6,6 +6,7 @@
     "start": "npx openclaw gateway --port 18789"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "openclaw": "latest"
   }
 }

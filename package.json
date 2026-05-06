@@ -1,0 +1,26 @@
+{
+  "name": "genesisclaw",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "This repository runs the OpenClaw AI engine and connects to Telegram.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NidhiMBhat/GenesisClaw.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NidhiMBhat/GenesisClaw/issues"
+  },
+  "homepage": "https://github.com/NidhiMBhat/GenesisClaw#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "express": "^5.2.1",
+    "openclaw": "^2026.5.3-1"
+  }
+}
