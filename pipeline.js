@@ -9,11 +9,13 @@ import { fileURLToPath } from "url";
 import { extractGaps } from "./gap-extractor.js";
 import { generatePlan } from "./execution-planner.js";
 import { readFileSync } from "fs";
+import { execSync } from "child_process";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LEADERBOARD_PATH = path.join(__dirname, "leaderboard.json");
 const GAP_SCHEMA = JSON.parse(readFileSync("./schemas/gap-schema.json", "utf8"));
 const PLAN_SCHEMA = JSON.parse(readFileSync("./schemas/plan-schema.json", "utf8"));
 const PENDING_PATH = path.join(__dirname, "memory/pending-abstract.json");
+
 
 function savePending(abstract, githubContext) {
   const dir = path.join(__dirname, "memory");
@@ -156,8 +158,20 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
   let gaps = [];
   try {
     gaps = await withRetry(() => extractGaps(abstract));
+    if (!gaps || gaps.length === 0) {
+  throw new Error("No gaps extracted");
+}
+    const clusteringResult = execSync(
+  `python dev2_module.py '${JSON.stringify(gaps)}'`
+).toString();
+
+const clusteredGaps = JSON.parse(clusteringResult);
+
+console.log("[pipeline] Clustered gaps:", clusteredGaps);
+gaps = clusteredGaps;
   } catch (err) {
     savePending(abstract, githubContext); // ← queue it for retry
+    
   
     console.error("[pipeline] Gap extraction threw:", err.message);
     throw new Error(`Gap extraction failed: ${err.message}`);
@@ -196,13 +210,12 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
       return generatePlan(gap.gap_text, gap.keywords, cleanedRepos);
     })
   );
-  plans.forEach((p, i) => {
-  validateAgainstSchema(p.plan, PLAN_SCHEMA, `Plan[${i}]`);
-  });
+  
 
   // Separate successes from failures
   const plans = [];
   const errors = [];
+  
 
   planResults.forEach((result, i) => {
     if (result.status === "fulfilled") {
@@ -212,6 +225,7 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
         gap_confidence: gapsToProcess[i].confidence,
         plan: result.value,
       });
+      
     } else {
       console.error(`[pipeline] Plan ${i + 1} failed:`, result.reason?.message);
       errors.push({
@@ -220,6 +234,10 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
         error: result.reason?.message || "Unknown error",
       });
     }
+  });
+
+  plans.forEach((p, i) => {
+  validateAgainstSchema(p.plan, PLAN_SCHEMA, `Plan[${i}]`);
   });
 
   const duration = Date.now() - startTime;
