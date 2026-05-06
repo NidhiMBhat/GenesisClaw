@@ -16,6 +16,22 @@ The system consists of several key components:
 - **Memory** (`memory/`): Stores pending abstracts for processing.
 - **Tests** (`tests/`): Unit tests for core components.
 
+How Each Piece Works
+1.server.js
+Express server running on port 3000. It receives HTTP requests and forwards them to the pipeline. It's the entry point — Dev 2 hits it with an abstract + GitHub repos, it hands everything to pipeline.js and sends back the result.
+
+2.pipeline.js
+The brain. Does 3 things in order:
+Sends abstract to gap-extractor.js → gets gaps
+Sends each gap + GitHub repos to execution-planner.js → gets plans
+Writes the result to leaderboard.json
+Also handles retries if Claude API 429s, and validates output against schemas.
+
+3.leaderboard.json — why it exists
+Tracks every pipeline run historically. So you can see: how many gaps were found, which models were recommended, how long it took, what the top gap was. It's the demo-facing proof that the system has been running
+
+4.memory/pending-abstract.json
+If the pipeline fails mid-run (Claude 429, network drop), the abstract isn't lost — it gets saved here as a queue entry. You can then hit POST /api/retry-pending to reprocess it. Without this, a failed run means the user has to resubmit manually.
 ## API Endpoints
 
 ### GET /health
