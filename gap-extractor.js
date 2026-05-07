@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { getModel } from "./gemini-client.js";
 
 const SYSTEM_PROMPT = `You are a research gap extraction engine. Your ONLY job is to analyze a scientific abstract and return a JSON array of research gaps.

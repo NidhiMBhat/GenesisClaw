@@ -1,22 +1,23 @@
-
-{
-  "last_updated": "2026-05-01T17:15:00Z",
-  "top_gaps": [
-    {
-      "id": "uuid-1",
-      "keywords": ["multimodal", "low-resource"],
-      "gap_statement": "Lack of robust datasets for Kannada-specific multimodal sentiment analysis.",
-      "citation_count": 12,
-      "source_papers": ["arXiv:2401.0521", "Semantic Scholar ID: 9921"],
-      "timestamp": "2026-05-01T12:00:00Z"
-    },
-    {
-      "id": "uuid-2",
-      "keywords": ["hallucination", "legal-rag"],
-      "gap_statement": "No standardized benchmark for verifying BNS statute citations in agentic workflows.",
-      "citation_count": 8,
-      "source_papers": ["LegalTech Journal Vol 4"],
-      "timestamp": "2026-05-01T12:10:00Z"
-    }
-  ]
-}
+[
+  {
+    "id": "run_1778152606593",
+    "timestamp": "2026-05-07T11:16:46.593Z",
+    "status": "success",
+    "top_gap": "No benchmark exists for evaluating the effectiveness of HalluCodeDetector on diverse codebases.",
+    "top_gap_confidence": "high",
+    "top_keywords": [
+      "HalluCodeDetector",
+      "benchmark",
+      "evaluation"
+    ],
+    "gaps_found": 3,
+    "plans_generated": 3,
+    "github_repos_used": 1,
+    "duration_ms": 2854,
+    "recommended_models": [
+      "HalluCodeDetector-v1",
+      "HalluCodeDetector-v2"
+    ],
+    "on_device_compatible": true
+  }
+]

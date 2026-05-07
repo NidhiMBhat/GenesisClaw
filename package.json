@@ -5,7 +5,9 @@
   "description": "This repository runs the OpenClaw AI engine and connects to Telegram.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "bot": "node discord-bot.js",
+    "all": "node server.js & node discord-bot.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,10 @@
   "homepage": "https://github.com/NidhiMBhat/GenesisClaw#readme",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "discord.js": "^14.26.4",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "groq-sdk": "^1.1.2",
     "openclaw": "^2026.5.3-1"
   }
 }

@@ -78,10 +78,13 @@ function readLeaderboard() {
   try {
     if (!fs.existsSync(LEADERBOARD_PATH)) {
       fs.writeFileSync(LEADERBOARD_PATH, JSON.stringify([], null, 2));
+      return [];
     }
     const raw = fs.readFileSync(LEADERBOARD_PATH, "utf8");
-    return JSON.parse(raw);
-  } catch {
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? data : [];
+  } catch (err){
+    console.error("[pipeline] Failed to read leaderboard, resetting to []:", err.message);
     return [];
   }
 }
@@ -154,6 +157,8 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
   // ── Step 1: Extract Research Gaps ───────────
   console.log("[pipeline] Step 1 — Extracting research gaps...");
   let gaps = [];
+  
+ 
   try {
     gaps = await withRetry(() => extractGaps(abstract));
   } catch (err) {
@@ -196,10 +201,6 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
       return generatePlan(gap.gap_text, gap.keywords, cleanedRepos);
     })
   );
-  plans.forEach((p, i) => {
-  validateAgainstSchema(p.plan, PLAN_SCHEMA, `Plan[${i}]`);
-  });
-
   // Separate successes from failures
   const plans = [];
   const errors = [];
@@ -220,6 +221,10 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
         error: result.reason?.message || "Unknown error",
       });
     }
+  });
+
+  plans.forEach((p, i) => {
+    validateAgainstSchema(p.plan, PLAN_SCHEMA, `Plan[${i}]`);
   });
 
   const duration = Date.now() - startTime;

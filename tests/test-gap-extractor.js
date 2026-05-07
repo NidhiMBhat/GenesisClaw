@@ -1,3 +1,5 @@
+import { config } from 'dotenv';
+config({ path: './.env' });
 import { extractGaps } from "../gap-extractor.js";
 
 // Sample abstracts for testing (replace with real Semantic Scholar pulls)

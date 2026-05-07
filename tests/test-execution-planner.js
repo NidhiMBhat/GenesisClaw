@@ -1,3 +1,5 @@
+import { config } from 'dotenv';
+config({ path: './.env' });
 import { generatePlan } from "../execution-planner.js";
 
 const testInput = {

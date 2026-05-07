@@ -3,6 +3,7 @@
  * Express API server. Entry point for Dev 2's GitHub search results + Dev 3's pipeline.
  */
 
+import 'dotenv/config';
 import express from "express";
 import { runPipeline } from "./pipeline.js";
 import { readFileSync, existsSync } from "fs";

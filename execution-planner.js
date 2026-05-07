@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { getModel } from "./gemini-client.js";
 
 const SYSTEM_PROMPT = `You are a senior AI hackathon architect. Given a research gap and GitHub context, output a complete 24-hour hackathon execution plan as a single valid JSON object.
