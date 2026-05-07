@@ -1,0 +1,122 @@
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.mt-4 { margin-top: 2rem; }
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.gap-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timestamp {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gap-title {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.kw-tag {
+  background: #2c2c2e;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.2);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.stat .value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.models-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.models-info .label {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.device-badge {
+  background: var(--accent-blue);
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+.status-banner {
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.status-banner .success { color: var(--success); display: flex; align-items: center; gap: 0.4rem; }
+.status-banner .partial { color: #f59e0b; display: flex; align-items: center; gap: 0.4rem; }

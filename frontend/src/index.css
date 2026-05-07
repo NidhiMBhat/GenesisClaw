@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-dark: #000000; /* Pure black for One UI dark mode */
+  --bg-card: #1c1c1e; /* Dark gray for cards */
+  --bg-card-hover: #2c2c2e; 
+  --text-main: #fcfcfc;
+  --text-muted: #8e8e93;
+  --accent-blue: #0162f4; /* Samsung primary blue */
+  --accent-blue-hover: #0056d6;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --danger: #ff3b30;
+  --success: #34c759;
+  --warning: #ff9500;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* One UI Style Cards */
+.glass-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-panel:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.25rem;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Forms */
+textarea, input {
+  width: 100%;
+  background: #2c2c2e;
+  border: 1px solid transparent;
+  color: var(--text-main);
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+  background: #3a3a3c;
+  border-color: var(--accent-blue);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 0.85rem 1.75rem;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.btn-primary:hover {
+  background: var(--accent-blue-hover);
+  transform: scale(0.98);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Badges */
+.badge {
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-high { background: rgba(52, 199, 89, 0.15); color: var(--success); }
+.badge-medium { background: rgba(255, 149, 0, 0.15); color: var(--warning); }
+.badge-low { background: rgba(255, 59, 48, 0.15); color: var(--danger); }
+.badge-neutral { background: #2c2c2e; color: var(--text-main); }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.loader-pulse {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Layout utilities */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 250px; /* Sidebar width */
+  max-width: calc(100vw - 250px);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
