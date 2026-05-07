@@ -7,21 +7,32 @@ import requests
 
 
 def extract_keywords(text):
+
     text = text.lower()
 
     if "privacy" in text:
-        return "ai privacy security"
+        return "AI privacy security federated learning"
 
-    if "cost" in text or "computational" in text:
-        return "efficient ai model optimization"
+    elif "cost" in text or "computational" in text:
+        return "efficient AI model optimization quantization"
 
-    if "real-time" in text:
-        return "real time ai inference edge ai"
+    elif "real-time" in text or "latency" in text:
+        return "4-bit quantized mobile NPU benchmarking multilingual inference"
 
-    if "energy" in text:
-        return "energy efficient ai deep learning"
+    elif "energy" in text:
+        return "energy efficient deep learning"
 
-    return "machine learning ai project"
+    elif "quantized" in text:
+        return "quantized LLM inference mobile AI"
+
+    elif "indic" in text or "multilingual" in text:
+        return "multilingual NLP Indic language models"
+
+    elif "benchmark" in text:
+        return "LLM benchmarking evaluation framework"
+
+    else:
+        return text[:80]
 
 
 def search_github_repos(query):

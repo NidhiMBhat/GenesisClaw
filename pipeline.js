@@ -1,3 +1,4 @@
+
 /**
  * GenesisClaw — pipeline.js
  * Orchestrates: Abstract → Gap Extraction → GitHub Context → Execution Plan → Leaderboard
@@ -9,6 +10,7 @@ import { fileURLToPath } from "url";
 import { extractGaps } from "./gap-extractor.js";
 import { generatePlan } from "./execution-planner.js";
 import { readFileSync } from "fs";
+import { execSync } from "child_process";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LEADERBOARD_PATH = path.join(__dirname, "leaderboard.json");
 const GAP_SCHEMA = JSON.parse(readFileSync("./schemas/gap-schema.json", "utf8"));
@@ -161,6 +163,15 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
  
   try {
     gaps = await withRetry(() => extractGaps(abstract));
+    const clusteringResult = execSync(
+  `python dev2_module.py "${JSON.stringify(gaps).replace(/"/g, '\\"')}"`
+).toString();
+
+const clusteredGaps = JSON.parse(clusteringResult);
+
+console.log("[pipeline] Clustered gaps:", clusteredGaps);
+
+gaps = clusteredGaps;
   } catch (err) {
     savePending(abstract, githubContext); // ← queue it for retry
   
