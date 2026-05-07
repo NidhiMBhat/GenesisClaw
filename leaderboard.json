@@ -1,5 +1,37 @@
 [
   {
+    "id": "run_1778165745840",
+    "timestamp": "2026-05-07T14:55:45.840Z",
+    "status": "partial",
+    "top_gap": "No benchmark exists for AI-driven driver wellness monitoring system performance on real-world driving scenarios.",
+    "top_gap_confidence": "high",
+    "top_keywords": [
+      "driver wellness",
+      "benchmark",
+      "AI-driven",
+      "driver monitoring"
+    ],
+    "gaps_found": 3,
+    "plans_generated": 2,
+    "github_repos_used": 2,
+    "duration_ms": 61866,
+    "recommended_models": [
+      {
+        "name": "YOLOv5",
+        "params": 640000000,
+        "framework": "PyTorch",
+        "quantized": true
+      },
+      {
+        "name": "MobileNetV3",
+        "params": 250000000,
+        "framework": "TensorFlow",
+        "quantized": true
+      }
+    ],
+    "on_device_compatible": true
+  },
+  {
     "id": "run_1778153414062",
     "timestamp": "2026-05-07T11:30:14.062Z",
     "status": "success",

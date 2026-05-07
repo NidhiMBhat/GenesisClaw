@@ -2,7 +2,7 @@ import { MOCK_LEADERBOARD, MOCK_GAPS, MOCK_ANALYSIS_PLAN } from '../data/mockDat
 
 const API_BASE = 'http://localhost:3000/api';
 // Set to true to use real backend, false for mock data during UI dev
-const USE_MOCK = true;
+const USE_MOCK = false;
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -44,5 +44,16 @@ export const generatePlan = async (abstract, githubContext = []) => {
     body: JSON.stringify({ abstract, github_context: githubContext })
   });
   if (!res.ok) throw new Error('Failed to analyze and plan');
+  return res.json();
+};
+
+export const getRunById = async (id) => {
+  if (USE_MOCK) {
+    await delay(500);
+    return MOCK_ANALYSIS_PLAN; // Return mock plan if in mock mode
+  }
+
+  const res = await fetch(`${API_BASE}/run/${id}`);
+  if (!res.ok) throw new Error('Failed to fetch run data');
   return res.json();
 };

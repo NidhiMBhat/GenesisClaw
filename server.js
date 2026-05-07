@@ -140,6 +140,27 @@ app.get("/api/leaderboard", (_req, res) => {
   }
 });
 
+/**
+ * GET /api/run/:id
+ * Returns the full execution plan for a specific run ID.
+ */
+app.get("/api/run/:id", (req, res) => {
+  const { id } = req.params;
+  const runPath = path.join(__dirname, "memory", "runs", `${id}.json`);
+  
+  try {
+    if (!existsSync(runPath)) {
+      return res.status(404).json({ error: "Run not found" });
+    }
+    const raw = readFileSync(runPath, "utf8");
+    const runData = JSON.parse(raw);
+    return res.json(runData);
+  } catch (err) {
+    console.error(`[server] Run read error for ${id}:`, err.message);
+    return res.status(500).json({ error: "Failed to read run data" });
+  }
+});
+
 // ─────────────────────────────────────────────
 
 /**

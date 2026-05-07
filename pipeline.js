@@ -164,7 +164,7 @@ export async function runPipeline(abstract, githubContext = [], options = {}) {
   try {
     gaps = await withRetry(() => extractGaps(abstract));
     const clusteringResult = execSync(
-  `python dev2_module.py "${JSON.stringify(gaps).replace(/"/g, '\\"')}"`
+  `python3 dev2_module.py "${JSON.stringify(gaps).replace(/"/g, '\\"')}"`
 ).toString();
 
 const clusteredGaps = JSON.parse(clusteringResult);
@@ -257,10 +257,11 @@ gaps = clusteredGaps;
     },
   };
 
-  // ── Step 4: Write to Leaderboard ────────────
+  // ── Step 4: Write to Leaderboard & Save Run ──
   if (!skipLeaderboard && plans.length > 0) {
+    const runId = `run_${Date.now()}`;
     const leaderEntry = {
-      id: `run_${Date.now()}`,
+      id: runId,
       timestamp: finalResult.meta.timestamp,
       status: finalResult.status,
       top_gap: gapsToProcess[0]?.gap_text,
@@ -275,7 +276,14 @@ gaps = clusteredGaps;
       on_device_compatible: plans[0]?.plan?.deployment?.on_device_compatible || false,
     };
     appendLeaderboard(leaderEntry);
-    console.log(`[pipeline] Leaderboard updated (${duration}ms total).`);
+
+    // Save full run to memory/runs
+    const runsDir = path.join(__dirname, "memory", "runs");
+    if (!fs.existsSync(runsDir)) fs.mkdirSync(runsDir, { recursive: true });
+    finalResult.id = runId;
+    fs.writeFileSync(path.join(runsDir, `${runId}.json`), JSON.stringify(finalResult, null, 2));
+
+    console.log(`[pipeline] Leaderboard updated and run saved (${duration}ms total).`);
   }
 
   console.log(

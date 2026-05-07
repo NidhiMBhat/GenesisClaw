@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getLeaderboard } from '../services/api';
 import { Clock, CheckCircle, AlertTriangle } from 'lucide-react';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({ entries: [], count: 0 });
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +37,12 @@ const Dashboard = () => {
 
       <div className="grid-3 mt-4">
         {data.entries.map((entry, index) => (
-          <div key={entry.id} className="glass-panel gap-card" style={{ animationDelay: `${index * 0.1}s` }}>
+          <div 
+            key={entry.id} 
+            className="glass-panel gap-card clickable-card" 
+            style={{ animationDelay: `${index * 0.1}s` }}
+            onClick={() => navigate(`/plan/${entry.id}`)}
+          >
             <div className="card-header">
               <span className={`badge badge-${entry.top_gap_confidence}`}>
                 {entry.top_gap_confidence.toUpperCase()} CONFIDENCE

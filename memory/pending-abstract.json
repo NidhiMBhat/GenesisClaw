@@ -1,0 +1,66 @@
+[
+  {
+    "id": "pending_1778165494294",
+    "abstract": "This research proposes an AI-driven driver wellness monitoring system that combines fatigue detection, heart-rate estimation, and behavioral analytics to predict unsafe driving conditions. Deep learning and sensor fusion techniques are used to improve road safety through real-time alerts and adaptive risk scoring.\n",
+    "githubContext": [
+      {
+        "url": "https://github.com/ultralytics/yolov5"
+      }
+    ],
+    "queued_at": "2026-05-07T14:51:34.294Z",
+    "retries": 0
+  },
+  {
+    "id": "pending_1778165497771",
+    "abstract": "This research proposes an AI-driven driver wellness monitoring system that combines fatigue detection, heart-rate estimation, and behavioral analytics to predict unsafe driving conditions. Deep learning and sensor fusion techniques are used to improve road safety through real-time alerts and adaptive risk scoring.\n",
+    "githubContext": [
+      {
+        "url": "https://github.com/ultralytics/yolov5"
+      }
+    ],
+    "queued_at": "2026-05-07T14:51:37.771Z",
+    "retries": 0
+  },
+  {
+    "id": "pending_1778165548561",
+    "abstract": "This research proposes an AI-driven driver wellness monitoring system that combines fatigue detection, heart-rate estimation, and behavioral analytics to predict unsafe driving conditions. Deep learning and sensor fusion techniques are used to improve road safety through real-time alerts and adaptive risk scoring.\n",
+    "githubContext": [
+      {
+        "url": "https://github.com/ultralytics/yolov5"
+      },
+      {
+        "url": "https://github.com/Pratham-mehta/Real-time-Driver-Drowsiness-Detection-System-Using-Deep-Learning"
+      }
+    ],
+    "queued_at": "2026-05-07T14:52:28.561Z",
+    "retries": 0
+  },
+  {
+    "id": "pending_1778165551819",
+    "abstract": "This research proposes an AI-driven driver wellness monitoring system that combines fatigue detection, heart-rate estimation, and behavioral analytics to predict unsafe driving conditions. Deep learning and sensor fusion techniques are used to improve road safety through real-time alerts and adaptive risk scoring.\n",
+    "githubContext": [
+      {
+        "url": "https://github.com/ultralytics/yolov5"
+      },
+      {
+        "url": "https://github.com/Pratham-mehta/Real-time-Driver-Drowsiness-Detection-System-Using-Deep-Learning"
+      }
+    ],
+    "queued_at": "2026-05-07T14:52:31.819Z",
+    "retries": 0
+  },
+  {
+    "id": "pending_1778165554189",
+    "abstract": "This research proposes an AI-driven driver wellness monitoring system that combines fatigue detection, heart-rate estimation, and behavioral analytics to predict unsafe driving conditions. Deep learning and sensor fusion techniques are used to improve road safety through real-time alerts and adaptive risk scoring.\n",
+    "githubContext": [
+      {
+        "url": "https://github.com/ultralytics/yolov5"
+      },
+      {
+        "url": "https://github.com/Pratham-mehta/Real-time-Driver-Drowsiness-Detection-System-Using-Deep-Learning"
+      }
+    ],
+    "queued_at": "2026-05-07T14:52:34.189Z",
+    "retries": 0
+  }
+]

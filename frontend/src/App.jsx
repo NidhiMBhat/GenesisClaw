@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Analyzer from './pages/Analyzer';
+import PlanView from './pages/PlanView';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/analyze" element={<Analyzer />} />
+            <Route path="/plan/:id" element={<PlanView />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
