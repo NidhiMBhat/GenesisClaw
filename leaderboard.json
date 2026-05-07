@@ -1,5 +1,26 @@
 [
   {
+    "id": "run_1778153414062",
+    "timestamp": "2026-05-07T11:30:14.062Z",
+    "status": "success",
+    "top_gap": "No benchmark exists for evaluating the effectiveness of HalluCodeDetector on a diverse set of code generation tasks.",
+    "top_gap_confidence": "high",
+    "top_keywords": [
+      "HalluCodeDetector",
+      "benchmark",
+      "code generation"
+    ],
+    "gaps_found": 3,
+    "plans_generated": 3,
+    "github_repos_used": 1,
+    "duration_ms": 3089,
+    "recommended_models": [
+      "HalluCodeDetector-v1",
+      "HalluCodeDetector-v2"
+    ],
+    "on_device_compatible": true
+  },
+  {
     "id": "run_1778152606593",
     "timestamp": "2026-05-07T11:16:46.593Z",
     "status": "success",
