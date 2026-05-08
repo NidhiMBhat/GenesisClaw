@@ -1,6 +1,6 @@
 import { MOCK_LEADERBOARD, MOCK_GAPS, MOCK_ANALYSIS_PLAN } from '../data/mockData';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://360d49bea94028.lhr.life';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://346c9ed611e0dd.lhr.life';
 // Set to true to use real backend, false for mock data during UI dev
 const USE_MOCK = false;
 

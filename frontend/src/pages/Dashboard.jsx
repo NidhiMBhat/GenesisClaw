@@ -4,7 +4,7 @@ import { Clock, CheckCircle, AlertTriangle, Settings, Radio } from 'lucide-react
 import './Dashboard.css';
 
 // Using standard fetch, assuming your backend is on localhost:3000
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://360d49bea94028.lhr.life';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://346c9ed611e0dd.lhr.life';
 
 const Dashboard = () => {
   const navigate = useNavigate();
