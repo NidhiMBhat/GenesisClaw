@@ -1,81 +1,97 @@
-# GenesisClaw Backend
+# 🦾 GenesisClaw
 
-This repository runs the OpenClaw AI engine and connects to Telegram. It provides an API for analyzing research paper abstracts, extracting research gaps, generating execution plans for hackathons, and maintaining a leaderboard of top research gaps.
+**GenesisClaw** is an autonomous AI research agent and execution pipeline. It continuously monitors arXiv for cutting-edge research papers across specific niches, extracts high-value "research gaps," clusters them using machine learning, and generates comprehensive hackathon-style execution plans (including architecture, timelines, and team roles) to solve those gaps.
 
-## Architecture
+## ✨ Key Features
 
-The system consists of several key components:
+* **Autonomous Research Worker:** A background daemon (`openclaw-worker`) that actively polls arXiv based on dynamically configurable niches (e.g., AI, NLP, Medical) stored in `heartbeat.md`.
+* **Intelligent Gap Extraction:** Uses LLMs to parse complex abstracts and identify distinct research opportunities.
+* **Python-Powered Clustering:** Integrates a Python module (`dev2_module.py`) to cluster similar research gaps and eliminate redundancy.
+* **Execution Planner:** Automatically generates an actionable project plan including layered architecture, a time-boxed execution timeline (e.g., 24-hour hackathon sprint), and role delegations.
+* **Real-Time Dashboard:** A React/Vite frontend featuring Server-Sent Events (SSE) for live updates as the autonomous worker discovers new papers and generates plans.
 
-- **Server** (`server.js`): Express.js API server with endpoints for health checks and abstract analysis.
-- **Pipeline** (`pipeline.js`): Orchestrates the entire workflow from abstract input to plan generation and leaderboard updates.
-- **Gap Extractor** (`gap-extractor.js`): Uses Google Gemini AI to identify specific, falsifiable research gaps from abstracts.
-- **Execution Planner** (`execution-planner.js`): Generates complete 24-hour hackathon execution plans based on gaps and GitHub context.
-- **Gemini Client** (`gemini-client.js`): Handles communication with Google's Generative AI API.
-- **Schemas** (`schemas/`): JSON schemas for validating gap and plan data structures.
-- **Leaderboard** (`leaderboard.json`): Maintains a ranked list of top research gaps with citations.
-- **Memory** (`memory/`): Stores pending abstracts for processing.
-- **Tests** (`tests/`): Unit tests for core components.
+---
 
-## API Endpoints
+## 🏗️ System Architecture
 
-### GET /health
-Returns server status and version information.
+GenesisClaw operates on a decoupled, dual-engine architecture:
 
-### POST /api/analyze
-Analyzes a research paper abstract and generates execution plans.
+1.  **The Brain (Express API):** Handles requests from the UI, orchestrates the LLM pipeline, runs Python clustering, and manages the local JSON memory (`leaderboard.json` and `memory/runs/`).
+2.  **The Autonomous Agent (Worker):** A standalone Node process that runs continuously, fetching papers and pushing them into the API's ingestion pipeline.
+3.  **The Command Center (React UI):** A dashboard to view trending gaps, monitor the live feed, and manually trigger new analysis flows.
 
-**Request Body:**
-```json
-{
-  "abstract": "string — research paper abstract (min 50 chars)",
-  "github_context": [
-    {
-      "name": "repo-name",
-      "url": "https://github.com/user/repo",
-      "description": "Repository description",
-      "stars": 100
-    }
-  ]
-}
-```
+---
 
-**Response:**
-```json
-{
-  "status": "success" | "partial" | "no_gaps" | "all_failed",
-  "gaps": [...],
-  "plans": [...],
-  "meta": {
-    "duration_ms": 1234,
-    "timestamp": "2026-05-06T...",
-    ...
-  }
-}
-```
+## 🛠️ Tech Stack
 
-## Dependencies
+* **Frontend:** React, Vite, React Router, TailwindCSS, Lucide Icons
+* **Backend:** Node.js, Express, Server-Sent Events (SSE)
+* **Data Processing:** Python 3 (Clustering module)
+* **Process Management:** PM2
+* **Deployment:** Google Cloud Platform (Compute Engine), Vercel, Ngrok
 
-- `@google/generative-ai`: For AI-powered gap extraction and planning
-- `express`: Web framework for the API server
-- `openclaw`: OpenClaw AI engine integration
+---
 
-## For Frontend Devs (React/Expo)
-Use the `leaderboard.json` file in the root directory to mock your API calls and build the UI while the backend is spinning up.
+## 🚀 Local Development Setup
 
-## For Backend Devs (Node.js)
-Because of Indian ISP firewalls blocking the Telegram API locally, **do not run this locally on a mobile hotspot.** 
-Run this via **GitHub Codespaces**.
+### Prerequisites
+* Node.js (v20+)
+* Python 3.x
+* A Gemini API Key (or preferred LLM provider)
 
-1. Open Codespaces.
-2. Add your `.env` variables (GEMINI_API_KEY required).
-3. Run `npm install`
-4. Run `npm start`
-
-## Testing
-
-Run tests with:
+### 1. Clone the Repository
 ```bash
-npm test
-```
+git clone [https://github.com/YOUR_USERNAME/GenesisClaw.git](https://github.com/YOUR_USERNAME/GenesisClaw.git)
+cd GenesisClaw
+2. Configure the Backend (The Brain & Worker)
+Bash
+# Navigate to the backend directory (if separate, or stay in root)
+npm install
 
-Individual test files are available in the `tests/` directory for gap extraction and execution planning components.
+# Create your environment file
+cp .env.example .env
+# Edit .env and add your LLM API keys and PORT=3000
+Open three separate terminals to run the stack locally:
+
+Terminal 1: Start the API Server
+
+Bash
+node server.js
+Terminal 2: Start the Autonomous Worker
+
+Bash
+node openclaw-worker.js
+3. Configure the Frontend (The Command Center)
+Terminal 3: Start the UI
+
+Bash
+cd frontend  # or your specific UI folder name
+npm install
+npm run dev
+Navigate to http://localhost:5173 to view the dashboard. Ensure src/services/api.js has API_BASE set to http://localhost:3000/api.
+
+☁️ Cloud Deployment (GCP + Vercel)
+Due to the local file system requirements for agent memory (memory/runs/), the backend must be hosted on a persistent Virtual Machine.
+
+Backend (Google Cloud Compute Engine)
+Spin up an e2-micro Ubuntu instance on GCP.
+
+Clone the repo and run npm install.
+
+Use PM2 to keep the dual engines running 24/7:
+
+Bash
+sudo npm install -g pm2
+pm2 start server.js --name "genesis-api"
+pm2 start openclaw-worker.js --name "genesis-worker"
+pm2 save && pm2 startup
+Secure Tunneling: To bypass Mixed Content blocks on the frontend, use Ngrok to expose the API securely:
+
+Bash
+npx ngrok http 3000
+Frontend (Vercel)
+Update src/services/api.js and src/pages/Dashboard.jsx to use the secure Ngrok URL (e.g., https://your-tunnel.ngrok-free.app/api).
+
+Push your code to GitHub.
+
+Import the project into Vercel and deploy.
