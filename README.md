@@ -2,6 +2,9 @@
 
 **GenesisClaw** is an autonomous AI research agent and execution pipeline. It continuously monitors arXiv for cutting-edge research papers across specific niches, extracts high-value "research gaps," clusters them using machine learning, and generates comprehensive hackathon-style execution plans (including architecture, timelines, and team roles) to solve those gaps.
 
+## Presentation
+[View Project Presentation](https://github.com/NidhiMBhat/GenesisClaw/blob/main/RVCE_RuntimeTerror_RVCE.pptx)
+
 ## ✨ Key Features
 
 * **Autonomous Research Worker:** A background daemon (`openclaw-worker`) that actively polls arXiv based on dynamically configurable niches (e.g., AI, NLP, Medical) stored in `heartbeat.md`.
