@@ -41,7 +41,7 @@ GenesisClaw operates on a decoupled, dual-engine architecture:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/YOUR_USERNAME/GenesisClaw.git](https://github.com/YOUR_USERNAME/GenesisClaw.git)
+git clone [https://github.com/NidhiMBhat/GenesisClaw.git]
 cd GenesisClaw
 2. Configure the Backend (The Brain & Worker)
 Bash
