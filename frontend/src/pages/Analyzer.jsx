@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { extractGaps, generatePlan } from '../services/api';
-import { Search, ChevronRight, GitBranch, Terminal } from 'lucide-react';
+import { Search, ChevronRight, GitBranch, Terminal, Clock, Users } from 'lucide-react';
 import './Analyzer.css';
 
 const Analyzer = () => {
   const [abstract, setAbstract] = useState('');
-  const [step, setStep] = useState(1); // 1: Input, 2: Loading Gaps, 3: Show Gaps/Mock GitHub, 4: Loading Plans, 5: Show Plans
+  const [step, setStep] = useState(1);
   const [gaps, setGaps] = useState([]);
   const [plans, setPlans] = useState([]);
-  const [githubRepos, setGithubRepos] = useState('https://github.com/example/repo1, https://github.com/example/repo2');
+  
+  // Dev 2 & 3 Inputs
+  const [githubRepos, setGithubRepos] = useState('https://github.com/example/repo1');
+  const [timeline, setTimeline] = useState('24');
+  const [teamSize, setTeamSize] = useState('4');
 
   const handleExtractGaps = async () => {
     if (!abstract || abstract.length < 50) return alert('Abstract too short.');
@@ -26,9 +30,16 @@ const Analyzer = () => {
   const handleGeneratePlans = async () => {
     setStep(4);
     try {
-      // Mock parsing the github repos input
-      const context = githubRepos.split(',').map(r => ({ url: r.trim() }));
-      const res = await generatePlan(abstract, context);
+      const context = githubRepos.split(',').filter(r => r.trim()).map(r => ({ url: r.trim() }));
+      
+      // Sending timeline and teamSize to the API
+      const res = await generatePlan({
+        abstract, 
+        github_context: context,
+        timeline_hours: Number(timeline),
+        team_size: Number(teamSize)
+      });
+      
       setPlans(res.plans || []);
       setStep(5);
     } catch (err) {
@@ -41,7 +52,7 @@ const Analyzer = () => {
     <div className="analyzer-container animate-fade-in">
       <header className="page-header">
         <h1>New Analysis Flow</h1>
-        <p>Pipeline: Abstract &rarr; AI Gap Extraction &rarr; GitHub Context &rarr; Hackathon Plan</p>
+        <p>Pipeline: Abstract &rarr; AI Gap Extraction &rarr; Project Parameters &rarr; Execution Plan</p>
       </header>
 
       {step === 1 && (
@@ -83,13 +94,40 @@ const Analyzer = () => {
           </div>
 
           <div className="glass-panel p-6 mt-6 dev2-mock">
-            <h3 className="flex items-center gap-2 text-blue"><GitBranch size={20} /> Dev 2 Step: GitHub Context</h3>
-            <p className="text-muted mb-4 text-sm">Provide relevant GitHub repo URLs to ground the plan generation (comma separated).</p>
-            <input 
-              type="text" 
-              value={githubRepos}
-              onChange={(e) => setGithubRepos(e.target.value)}
-            />
+            <h3 className="flex items-center gap-2 text-blue mb-4"><Settings size={20} /> Project Parameters</h3>
+            
+            <div className="grid-3 gap-4 mb-4">
+              <div>
+                <label className="text-sm text-muted flex items-center gap-1 mb-1"><Clock size={14}/> Timeline (Hours)</label>
+                <select value={timeline} onChange={(e) => setTimeline(e.target.value)} className="w-full p-2 bg-dark border border-gray-700 rounded">
+                  <option value="12">12 Hours (Sprint)</option>
+                  <option value="24">24 Hours (Hackathon)</option>
+                  <option value="48">48 Hours (Weekend)</option>
+                  <option value="168">1 Week (Project)</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="text-sm text-muted flex items-center gap-1 mb-1"><Users size={14}/> Team Size</label>
+                <input 
+                  type="number" min="1" max="10"
+                  value={teamSize}
+                  onChange={(e) => setTeamSize(e.target.value)}
+                  className="w-full p-2 bg-dark border border-gray-700 rounded"
+                />
+              </div>
+            </div>
+
+            <div className="mb-4">
+               <label className="text-sm text-muted flex items-center gap-1 mb-1"><GitBranch size={14}/> GitHub Context URLs (Comma separated)</label>
+               <input 
+                 type="text" 
+                 value={githubRepos}
+                 onChange={(e) => setGithubRepos(e.target.value)}
+                 className="w-full p-2 bg-dark border border-gray-700 rounded"
+               />
+            </div>
+
             <div className="mt-4 flex justify-end">
               <button className="btn-primary" onClick={handleGeneratePlans}>
                 Generate Execution Plans <Terminal size={18} />
@@ -101,7 +139,7 @@ const Analyzer = () => {
 
       {step === 4 && (
         <div className="loading-state loader-pulse glass-panel p-6">
-          Architecting Hackathon Execution Plans...
+          Architecting {timeline}-Hour Execution Plans for a Team of {teamSize}...
         </div>
       )}
 
@@ -119,14 +157,14 @@ const Analyzer = () => {
                 <div className="plan-section">
                   <h4><Terminal size={16} /> Architecture</h4>
                   <div className="arch-layers">
-                    {p.plan.architecture.map((layer) => (
+                    {p.plan?.architecture?.map((layer) => (
                       <div key={layer.layer} className="layer-item">
                         <div className="layer-num">L{layer.layer}</div>
                         <div className="layer-info">
                           <h5>{layer.name}</h5>
                           <p>{layer.description}</p>
                           <div className="tech-stack">
-                            {layer.tech_stack.map(t => <span key={t} className="tech-tag">{t}</span>)}
+                            {layer.tech_stack?.map(t => <span key={t} className="tech-tag">{t}</span>)}
                           </div>
                         </div>
                       </div>
@@ -135,9 +173,9 @@ const Analyzer = () => {
                 </div>
 
                 <div className="plan-section timeline-section">
-                  <h4><Search size={16} /> 24-Hour Timeline</h4>
+                  <h4><Search size={16} /> {timeline}-Hour Timeline</h4>
                   <div className="timeline-blocks">
-                    {p.plan.timeline.map((t, idx) => (
+                    {p.plan?.timeline?.map((t, idx) => (
                       <div key={idx} className="time-block">
                         <span className="time-range">{t.hour_range}</span>
                         <div className="time-details">
@@ -150,19 +188,14 @@ const Analyzer = () => {
                 </div>
 
                 <div className="plan-section">
-                  <h4>Roles</h4>
+                  <h4>Roles ({teamSize} Members)</h4>
                   <div className="roles-grid">
-                    {p.plan.roles.map((r, idx) => (
+                    {p.plan?.roles?.map((r, idx) => (
                       <div key={idx} className="role-card">
                         <h5>{r.role_title}</h5>
-                        <div className="text-xs text-muted mb-1">Responsibilities:</div>
-                        <ul className="text-sm pl-4 mb-2">
-                          {r.responsibilities.map(res => <li key={res}>{res}</li>)}
+                        <ul className="text-sm pl-4 mb-2 mt-2">
+                          {r.responsibilities?.map(res => <li key={res}>{res}</li>)}
                         </ul>
-                        <div className="text-xs text-muted mb-1">Skills:</div>
-                        <div className="flex flex-wrap gap-1">
-                           {r.required_skills.map(s => <span key={s} className="tech-tag text-xs">{s}</span>)}
-                        </div>
                       </div>
                     ))}
                   </div>

@@ -145,7 +145,7 @@ function validateGithubContext(githubContext) {
  * @returns {Promise<Object>} result
  */
 export async function runPipeline(abstract, githubContext = [], options = {}) {
-  const { skipLeaderboard = false, maxGaps = 4 } = options;
+  const { skipLeaderboard = false, maxGaps = 4, timelineHours = 24, teamSize = 4 } = options;
   const startTime = Date.now();
 
   // ── Step 0: Validate inputs ──────────────────
@@ -209,7 +209,7 @@ gaps = clusteredGaps;
   const planResults = await Promise.allSettled(
     gapsToProcess.map((gap, i) => {
       console.log(`[pipeline]   → Planning gap ${i + 1}: "${gap.gap_text?.slice(0, 60)}..."`);
-      return generatePlan(gap.gap_text, gap.keywords, cleanedRepos);
+      return generatePlan(gap.gap_text, gap.keywords, cleanedRepos, timelineHours, teamSize);
     })
   );
   // Separate successes from failures

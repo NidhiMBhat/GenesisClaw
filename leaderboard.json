@@ -1,5 +1,86 @@
 [
   {
+    "id": "oc_1778248311592",
+    "source": "openclaw_worker",
+    "paper_title": "SAT: Sequential Agent Tuning for Coordinator Free Plug and Play Multi-LLM Training with Monotonic Improvement Guarantees",
+    "arxiv_id": "2605.05216",
+    "top_gap": "No benchmark exists for evaluating the performance of teams of smaller LLMs compared to a single large model on AIME24/25 benchmarks.",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:51:51.592Z"
+  },
+  {
+    "id": "oc_1778248273522",
+    "source": "openclaw_worker",
+    "paper_title": "Nationwide EHR-Based Chronic Rhinosinusitis Prediction Using Demographic-Stratified Models",
+    "arxiv_id": "2605.05213",
+    "top_gap": "No benchmark exists for CRS risk stratification using EHR data across diverse patient populations.",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:51:13.522Z"
+  },
+  {
+    "id": "oc_1778248235796",
+    "source": "openclaw_worker",
+    "paper_title": "Are Flat Minima an Illusion?",
+    "arxiv_id": "2605.05209",
+    "top_gap": "No benchmark exists for the relationship between sharpness and generalisation on different datasets.",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:50:35.796Z"
+  },
+  {
+    "id": "oc_1778248196493",
+    "source": "openclaw_worker",
+    "paper_title": "Generating Query-Focused Summarization Datasets from Query-Free Summarization Datasets",
+    "arxiv_id": "2605.05392",
+    "top_gap": "No benchmark exists for evaluating the quality of query keywords generated from query-free datasets.",
+    "plans_generated": 1,
+    "timestamp": "2026-05-08T13:49:56.493Z"
+  },
+  {
+    "id": "oc_1778248161529",
+    "source": "openclaw_worker",
+    "paper_title": "Counterargument for Critical Thinking as Judged by AI and Humans",
+    "arxiv_id": "2605.05353",
+    "top_gap": "No benchmark exists for evaluating the effectiveness of counterarguments in writing for critical thinking in the context of Generative AI.",
+    "plans_generated": 1,
+    "timestamp": "2026-05-08T13:49:21.529Z"
+  },
+  {
+    "id": "oc_1778248122549",
+    "source": "openclaw_worker",
+    "paper_title": "AdaGATE: Adaptive Gap-Aware Token-Efficient Evidence Assembly for Multi-Hop Retrieval-Augmented Generation",
+    "arxiv_id": "2605.05245",
+    "top_gap": "No benchmark exists for evaluating the robustness of retrieval-augmented generation on multi-hop questions under noisy or redundant evidence.",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:48:42.549Z"
+  },
+  {
+    "id": "oc_1778248083962",
+    "source": "openclaw_worker",
+    "paper_title": "Actionable Real-Time Modeling of Surgical Team Dynamics via Time-Expanded Interaction Graphs",
+    "arxiv_id": "2605.04169",
+    "top_gap": "No benchmark exists for evaluating the performance of surgical AI systems in modeling intraoperative team interactions.",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:48:03.962Z"
+  },
+  {
+    "id": "oc_1778248057687",
+    "source": "openclaw_worker",
+    "paper_title": "Regularized Centered Emphatic Temporal Difference Learning",
+    "arxiv_id": "2605.04100",
+    "top_gap": "No benchmark exists for evaluating the performance of off-policy temporal-difference learning methods on diagnostic linear off-policy prediction tasks.",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:47:37.687Z"
+  },
+  {
+    "id": "oc_1778248028219",
+    "source": "openclaw_worker",
+    "paper_title": "LCM: Lossless Context Management",
+    "arxiv_id": "2605.04050",
+    "top_gap": "No benchmark exists for long-context tasks on datasets larger than 1M tokens",
+    "plans_generated": 2,
+    "timestamp": "2026-05-08T13:47:08.219Z"
+  },
+  {
     "id": "run_1778165745840",
     "timestamp": "2026-05-07T14:55:45.840Z",
     "status": "partial",

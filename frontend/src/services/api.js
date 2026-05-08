@@ -32,16 +32,17 @@ export const extractGaps = async (abstract) => {
   return res.json();
 };
 
-export const generatePlan = async (abstract, githubContext = []) => {
+export const generatePlan = async (payload) => {
   if (USE_MOCK) {
     await delay(2000);
     return MOCK_ANALYSIS_PLAN;
   }
 
+  // Payload already contains { abstract, github_context, timeline_hours, team_size }
   const res = await fetch(`${API_BASE}/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ abstract, github_context: githubContext })
+    body: JSON.stringify(payload)
   });
   if (!res.ok) throw new Error('Failed to analyze and plan');
   return res.json();
