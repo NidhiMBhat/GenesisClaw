@@ -1,6 +1,6 @@
 import { MOCK_LEADERBOARD, MOCK_GAPS, MOCK_ANALYSIS_PLAN } from '../data/mockData';
 
-const API_BASE = 'http://104.198.45.96:3000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://104.198.45.96:3000/api';
 // Set to true to use real backend, false for mock data during UI dev
 const USE_MOCK = false;
 

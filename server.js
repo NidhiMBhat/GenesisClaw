@@ -373,6 +373,7 @@ app.use((req, res) => {
       "GET  /health",
       "POST /api/analyze",
       "GET  /api/leaderboard",
+      "GET  /api/run/:id",
       "POST /api/analyze/gaps-only",
       "GET  /api/niches",
       "POST /api/niches",
